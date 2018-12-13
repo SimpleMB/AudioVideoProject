@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AudioVideoProject</string>
+    <string name="playBtn">Play</string>
+</resources>
