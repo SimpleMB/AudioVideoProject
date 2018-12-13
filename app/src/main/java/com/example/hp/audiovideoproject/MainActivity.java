@@ -40,35 +40,35 @@ public class MainActivity extends AppCompatActivity {
         seekBarMove = findViewById(R.id.seekBarMove);
 
 
-        btnPlay.setOnClickListener (new View.OnClickListener() {
-            @Override
-            public void onClick(View vid) {
-
-                myVideoView.start();        // start playing video
-
-            }
-        });                      // setting onClickListeners to buttons
-
-
-        btnPlayMusic.setOnClickListener (new View.OnClickListener() {
-            @Override
-            public void onClick(View music) {
-
-                myMusic.start();            //start playing music
-
-            }
-        });
-
-
-        btnPauseMusic.setOnClickListener (new View.OnClickListener() {
-            @Override
-            public void onClick(View pause) {
-
-                myVideoView.pause();
-                myMusic.pause();
-
-            }
-        });
+//        btnPlay.setOnClickListener (new View.OnClickListener() {
+//            @Override
+//            public void onClick(View vid) {
+//
+//                myVideoView.start();        // start playing video
+//
+//            }
+//        });                      // setting onClickListeners to buttons
+//
+//
+//        btnPlayMusic.setOnClickListener (new View.OnClickListener() {
+//            @Override
+//            public void onClick(View music) {
+//
+//                myMusic.start();            //start playing music
+//
+//            }
+//        });
+//
+//
+//        btnPauseMusic.setOnClickListener (new View.OnClickListener() {
+//            @Override
+//            public void onClick(View pause) {
+//
+//                myVideoView.pause();
+//                myMusic.pause();
+//
+//            }
+//        });
 
         mediaControler = new MediaController(MainActivity.this);    // creating new media controller object
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);      // creating (getting) new Audio Service
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         int currentVol = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         seekBarVolume.setMax(maximumVol);
         seekBarVolume.setProgress(currentVol);
-        seekBarVolume.setOnSeekBarChangeListener (new SeekBar.OnSeekBarChangeListener() {
+        seekBarVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Uri uriVid = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.power);   // setting path to video file in res/raw folder
-                                                                                                // and adding it to new variable of type Uri
+        // and adding it to new variable of type Uri
         myVideoView.setVideoURI(uriVid);                    // adding file from path to VideoView
         myVideoView.setMediaController(mediaControler);     // add media controller to VideoView
         mediaControler.setAnchorView(myVideoView);          // anchor media controller to VideoView
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         Uri uriMusic = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.carefree);
         myMusic = MediaPlayer.create(MainActivity.this, uriMusic);
 
-
+    }
 
         // Seek Bar for progress of playing
 
@@ -132,10 +132,9 @@ public class MainActivity extends AppCompatActivity {
 //    }
 //
 
-//    @Override
-//    public void onClick(View btnClicked) {
+//    public void btnClicked (View view) {
 //
-//        switch (btnClicked.getId()) {
+//        switch (btnIsClicked.getId()) {
 //
 //            case R.id.btnPlay:
 //                myVideoView.start();        // start playing video
@@ -157,9 +156,7 @@ public class MainActivity extends AppCompatActivity {
 ////                timer.cancel();             // cancels timer progress thread
 //                break;
 //        }
-//
-//    }
-//
+
 //
 //    @Override
 //    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -178,4 +175,31 @@ public class MainActivity extends AppCompatActivity {
 //    public void onStopTrackingTouch(SeekBar seekBar) {
 //
 //    }
-}}
+
+    public void btnClicked (View btnIsClicked) {
+
+        switch (btnIsClicked.getId()) {
+
+            case R.id.btnPlay:
+                myVideoView.start();        // start playing video
+                break;
+            case R.id.btnPlayMusic:
+                myMusic.start();            //start playing music
+//                timer = new Timer();
+//                timer.scheduleAtFixedRate(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//
+//                        seekBarMove.setProgress(myMusic.getCurrentPosition());
+//                    }
+//                }, 0, 1000);
+                break;
+            case R.id.btnPauseMusic:
+                myVideoView.pause();        //video paused
+                myMusic.pause();            //music paused
+//                timer.cancel();             // cancels timer progress thread
+                break;
+        }
+
+    }
+}
